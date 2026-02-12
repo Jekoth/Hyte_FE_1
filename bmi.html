@@ -1,71 +1,70 @@
-<!-- Sivuston layout inspiraatio -->
-<!-- https://dribbble.com/shots/23369008-Gym-Fitness-Landing-Page -->
-
 <!doctype html>
-<html lang="en">
+<html lang="fi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <meta
-      name="description"
-      content="On tärkeää että pidät huolta itsestäsi. Seuraa treeniohjeitamme, tarkastele terveyttäsi
-      HRV tiedon avulla ja voi kokonaisvaltaisesti hyvin. Suuntaa nyt hyvinvointia ja uutta
-      elämääsi kohti."
-    />
+    <meta name="description" content="BMI laskuri - MealEntry" />
 
-    <title>HyteGym</title>
+    <title>MealEntry</title>
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;1,300&family=Roboto+Slab:wght@100;200;300;400;500;600;700;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&family=Roboto+Slab:wght@300;700;900&family=Roboto:wght@300;400;700;900&display=swap"
       rel="stylesheet"
     />
-  </head>
-  <body>
-    <!---------------->
-    <!-- Navigation -->
 
-    <nav>
-      <ul>
-        <li><a href="" id="logo">HyteGym</a></li>
-        <li>
-          <a href="index.html" class="navlink">Koti</a>
-        </li>
-        <li>
-          <!-- <a href="./bmi/" class="navlink">BMI laskuri</a> -->
-          <a href="#" class="navlink selected">BMI laskuri</a>
-        </li>
-        <li>
-          <a href="viikkotehtavat.html" class="navlink">Viikkotehtävät</a>
-        </li>
-      </ul>
-      <span class="header-links"></span>
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/bmi.css" />
+  </head>
+
+  <body>
+    <nav class="site-nav">
+      <div class="nav-inner">
+        <a href="index.html" class="logo">MealEntry</a>
+
+        <ul class="nav-links">
+          <li><a href="index.html" class="navlink">Koti</a></li>
+          <li><a href="bmi.html" class="navlink selected">BMI laskuri</a></li>
+
+          <li class="nav-user">
+            <span id="userBadge" class="user-badge"></span>
+          </li>
+
+          <li class="nav-right">
+            <a href="login.html" class="navlink nav-cta" id="authLink">Kirjaudu</a>
+          </li>
+        </ul>
+      </div>
     </nav>
 
-    <main>
-      <div class="card">
-        <img src="/images/bmi.jpeg" alt="BMI Index chart" style="width: 100%" />
+    <main class="bmi-page">
+      <section class="bmi-card">
+        <img src="/images/bmi.jpeg" alt="BMI Index chart" />
+
         <h2>Painoindeksilaskuri / BMI-laskuri</h2>
         <p class="description">
-          Painoindeksilaskurilla voit laskea pituuden ja painon perustella
-          painoindeksin (BMI, Body Mass Index).
+          Painoindeksilaskurilla voit laskea pituuden ja painon perusteella painoindeksin
+          (BMI, Body Mass Index).
         </p>
 
-        <form action="">
+        <form>
           <label for="weight">Anna painosi:</label>
           <input type="text" id="weight" name="weight" placeholder="kg" />
+
           <label for="height">Anna pituutesi:</label>
           <input type="text" id="height" name="height" placeholder="cm" />
+
           <button type="submit" class="btn calculate">Laske indeksi</button>
         </form>
 
         <section class="bmi-table">
-          <p>Mittaustuloksesi: <span class="bmi-score">0</span></p>
+          <p class="bmi-result">
+            Mittaustuloksesi: <span class="bmi-score">0</span>
+          </p>
 
-          <table id="bmiTbl" class="table table-bordered">
+          <table id="bmiTbl">
             <tbody>
               <tr class="bmi0-19">
                 <td>Alipaino</td>
@@ -82,13 +81,18 @@
             </tbody>
           </table>
 
-          <p>
-            〽️ Analyysi:
-            <span class="analysis">Tähän saat analyysin BMI tuloksestasi</span>
+          <p class="bmi-analysis">
+            Analyysi: <span class="analysis">Tähän saat analyysin BMI tuloksestasi</span>
           </p>
         </section>
-      </div>
+      </section>
     </main>
+
+    <footer>
+      <p>Copyright, MealEntry</p>
+    </footer>
+
+    <script type="module" src="/src/js/main.js"></script>
+    <script type="module" src="/src/js/bmi.js"></script>
   </body>
-  <script type="module" src="/src/js/bmi.js"></script>
 </html>

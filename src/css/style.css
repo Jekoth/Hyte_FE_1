@@ -1,4 +1,3 @@
-/* @import url('https://fonts.googleapis.com/css?family=Roboto+Slab&display=swap'); */
 @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 
 * {
@@ -7,261 +6,453 @@
   padding: 0;
 }
 
+:root {
+  --nav-h: 68px;
+}
+
 html {
   scroll-behavior: smooth;
+  background: #f6f7fb;
 }
 
 body {
-  font-family:
-    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
-    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-size: 1em;
-}
-
-nav,
-header,
-main {
-  max-width: 1200px;
-  margin: auto;
-}
-
-/*********************/
-/* utility & main classes */
-
-.black_cl {
+  background: #f6f7fb;
   color: rgba(24, 31, 37, 1);
 }
-.bolder {
-  font-weight: bolder;
-}
-.light_font {
-  color: rgb(202, 202, 202);
-}
-.main_cl {
-  color: rgb(86, 210, 216);
-}
-.fl {
-  float: left;
-}
-.mb-10 {
-  margin-bottom: 10px;
-}
-.fd-col {
-  flex-direction: column;
-}
 
-/********************************/
-/* Navigaatio alueen tyylittely */
-
-nav {
-  background-color: white;
-  color: #fff;
-  padding: 0.5rem 4rem;
-  font-weight: 100;
-  font-size: 1.2em;
-  background-color: rgb(30, 39, 46);
-  box-shadow: 0 8px 16px -6px black;
-  height: 100px;
-}
-nav ul {
-  padding-top: 29px;
-  list-style-type: none;
+main {
+  flex: 1;
 }
 
 a {
   text-decoration: none;
 }
 
-/* Logon erityis liukuväri */
+/* ======================================================
+   Layout containers
+   ====================================================== */
 
-nav ul li:first-child a {
-  /* Fallback: Set a background color. */
-  background-color: rgb(65 77 159);
+header,
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
 
-  /* Create the gradient. */
-  /* background-image: linear-gradient(45deg, #f3ec78, #af4261);*/
+/* ======================================================
+   Utilities
+   ====================================================== */
+
+.black_cl {
+  color: rgba(24, 31, 37, 1);
+}
+
+.bolder {
+  font-weight: bolder;
+}
+
+.light_font {
+  color: rgb(202, 202, 202);
+}
+
+.main_cl {
+  color: rgb(86, 210, 216);
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+/* ======================================================
+   NAV (SAMA KAIKILLA SIVUILLA)
+   ====================================================== */
+
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-h);
+  z-index: 9999;
+
+  background: rgb(30, 39, 46);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
+}
+
+.nav-inner {
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 18px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-user {
+  margin-left: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.user-badge {
+  display: inline-block;
+  padding: 7px 12px;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.92);
+  font-weight: 800;
+  font-size: 0.9em;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  white-space: nowrap;
+}
+
+.logo {
   background-image: linear-gradient(45deg, rgb(86, 210, 216), rgb(65 77 159));
-
-  /* Set the background size and repeat properties. */
-  background-size: 100%;
-  background-repeat: repeat;
-
-  /* Use the text as a mask for the background. */
-  /* This will show the gradient as a text color rather than element bg. */
-  background-clip: text;
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
-  -moz-background-clip: text;
-  -moz-text-fill-color: transparent;
-  font-size: larger;
+
   font-family: 'Roboto Slab', serif;
   font-weight: 900;
-  margin-right: 40px;
+  font-size: 1.15em;
+  display: inline-block;
+  padding: 6px 0;
 }
 
-nav ul a {
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.nav-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+.navlink {
   color: rgb(197, 197, 197);
-  padding: 0.6rem;
-  margin: 0 0.25em;
-  font-size: smaller;
-  transition: color 0.5s;
+  padding: 10px 12px;
+  font-size: 0.9em;
+  border-radius: 12px;
+  display: inline-block;
+  transition: color 0.25s, background-color 0.25s, border-color 0.25s;
+  line-height: 1;
 }
 
-nav ul li {
-  float: left;
-}
-nav ul li a:hover {
+.navlink:hover {
   color: rgb(206, 255, 149);
+  background: rgba(255, 255, 255, 0.06);
 }
 
-.selected {
-  border-bottom: 1px solid var(rgb(86, 210, 216));
-  color: var(rgb(86, 210, 216));
+.navlink.selected {
+  color: rgb(86, 210, 216);
+  background: rgba(86, 210, 216, 0.1);
+  border: 1px solid rgba(86, 210, 216, 0.25);
 }
 
-/*********************/
-/* Herokuva */
+.nav-cta {
+  border: 1px solid rgba(206, 255, 149, 0.35);
+  border-radius: 14px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* ======================================================
+   HOME (index.html)
+   ====================================================== */
 
 #taustakuva {
-  max-width: 1200px;
-  margin: auto;
-  width: 100%;
-  height: 300px;
-  background-color: aliceblue;
-  background-image: url(/images/kukka.jpeg);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  display: none;
 }
 
-/*********************/
-/* Infoalueen tyylittely */
-
 .info-area {
-  margin-top: 50px;
+  margin-top: 26px;
 }
 
 #info-text {
   text-align: center;
-  /* This way the text wont wrap */
-  font-size: 1.5em;
+  font-size: 1.25em;
+  padding: 0 10px;
+  color: rgba(24, 31, 37, 0.85);
 }
 
-/*********************/
-/* About osion tyylittely */
-
-.about-us {
-  min-height: 400px;
-  background-color: #f0f0f0;
-  background-image: url('../images/pexels-lukas-crop.jpg');
-  background-position: right;
-  background-size: cover;
-  padding: 80px;
-  padding-right: 30%;
-  color: black;
-  position: relative;
-  margin-top: 50px;
-}
-.about-us p {
-  margin-bottom: 15px;
-}
-.card-inside {
-  margin-right: 50px;
-  margin-bottom: 30px;
-  max-width: 330px;
-  border-radius: 20px;
+/* HERO */
+.hero {
+  margin-top: 22px;
+  border-radius: 22px;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    rgba(86, 210, 216, 0.28),
+    rgba(65, 77, 159, 0.18)
+  );
+  padding: 56px 48px;
+  border: 1px solid rgba(24, 31, 37, 0.06);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
 }
 
-/*********************/
-/* BMI osion tyylittely */
-
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 500px;
-  margin: 50px auto;
-  padding: 30px;
+.hero-content {
+  max-width: 820px;
 }
 
-.card > h2 {
-  margin-top: 15px;
-}
-
-.card p {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-.description {
-  color: grey;
-  font-size: 18px;
-}
-
-label {
-  display: block;
-}
-
-input[type='text'] {
-  width: 50%;
-  padding: 12px 20px;
-  margin: 8px 0;
+.hero-kicker {
   display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.72);
+  color: rgba(24, 31, 37, 0.95);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.6px;
+  margin-bottom: 14px;
 }
 
-.btn {
-  margin-top: 20px;
+.hero-title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 52px;
+  line-height: 1.05;
+  margin-bottom: 14px;
+  letter-spacing: -0.3px;
+}
+
+.hero-lead {
+  font-size: 18px;
+  color: rgba(24, 31, 37, 0.82);
   margin-bottom: 20px;
+  max-width: 680px;
+  line-height: 1.6;
+}
+
+/* BUTTON */
+.btn {
   border: none;
   outline: 0;
   display: inline-block;
-  padding: 8px;
+  padding: 12px 14px;
   color: white;
   background-color: rgb(30, 39, 46);
   text-align: center;
   cursor: pointer;
   width: 100%;
-  font-size: 18px;
+  font-size: 16px;
+  border-radius: 14px;
+  transition: transform 0.15s, opacity 0.15s;
+  font-weight: 900;
 }
 
-.btn:hover,
-a:hover {
-  opacity: 0.7;
+.btn:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
 }
 
-tbody {
-  background-color: #fff;
+/* Hero buttons */
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
 }
 
-td {
-  border: 1px solid #ddd;
-  padding: 5px;
+.btn-inline {
+  width: auto;
+  padding: 12px 16px;
 }
 
-.lowBmi {
-  background-color: rgb(71, 178, 210);
-}
-.normalBmi {
-  background-color: rgb(112, 223, 112);
-}
-.highBmi {
-  background-color: rgb(244, 148, 30);
+.btn-outline {
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(24, 31, 37, 0.18);
+  color: rgba(24, 31, 37, 0.92);
 }
 
-/*********************/
-/* Footer osion tyylittely */
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.hero-pills {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.pill {
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(24, 31, 37, 0.08);
+  color: rgba(24, 31, 37, 0.95);
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.feature-grid {
+  margin: 26px auto 0 auto;
+  max-width: 1000px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(24, 31, 37, 0.08);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+}
+
+.feature-card h3 {
+  margin-bottom: 8px;
+}
+
+.feature-card p {
+  margin: 0;
+  color: rgba(24, 31, 37, 0.8);
+  line-height: 1.55;
+}
+
+/* ABOUT */
+.about-us {
+  margin-top: 28px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(24, 31, 37, 0.08);
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow: 0 16px 26px rgba(0, 0, 0, 0.06);
+}
+
+.about-wrap {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(24, 31, 37, 0.08);
+  border-radius: 18px;
+  padding: 18px;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+/* ======================================================
+   Forms (shared)
+   ====================================================== */
+
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='number'],
+input[type='email'],
+textarea,
+select {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 8px 0;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 12px;
+  outline: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: rgba(86, 210, 216, 0.9);
+  box-shadow: 0 0 0 4px rgba(86, 210, 216, 0.18);
+}
+
+/* ======================================================
+   Footer
+   ====================================================== */
 
 footer {
   width: 100%;
-  text-align: center;
-  padding-top: 40px;
-  background-color: rgb(117, 11, 44);
-  filter: brightness(40%);
-  height: 100px;
-  margin-top: 50px;
+  background-color: rgb(30, 39, 46);
   color: #fefefe;
+  margin-top: auto;
 }
 
-/* Breakpointit tänne */
+footer p {
+  margin: 0;
+  padding: 18px 18px;
+  text-align: center;
+  opacity: 0.9;
+}
+
+/* ======================================================
+   Responsive
+   ====================================================== */
+
+@media (max-width: 980px) {
+  .feature-grid {
+    grid-template-columns: 1fr;
+    max-width: 820px;
+  }
+
+  .hero {
+    padding: 34px 22px;
+  }
+
+  .hero-title {
+    font-size: 38px;
+  }
+}
+
+@media (max-width: 620px) {
+  .nav-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 12px 14px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .nav-right {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .nav-right .nav-cta {
+    width: 100%;
+    text-align: center;
+  }
+
+  header,
+  main {
+    padding: 0 14px;
+  }
+
+  .hero {
+    padding: 24px 16px;
+  }
+
+  .hero-title {
+    font-size: 30px;
+  }
+}

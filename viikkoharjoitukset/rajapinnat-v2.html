@@ -17,9 +17,7 @@
         Tämän jälkeen luo items lista tämän kappaleen alle
       </p>
 
-      <ul class="fruitlist">
-        <li>Hedelmä</li>
-      </ul>
+      <ul class="fruitlist"></ul>
 
       <pre>GET http://localhost:3000/api/items </pre>
       <button class="get_items">Get all items</button>
@@ -39,13 +37,66 @@
         <button type="button" class="delete-item">Poista item</button>
       </form>
 
+      <h3>Items, POST (lisää uusi hedelmä)</h3>
+
+      <form class="add-item-form">
+        <label for="newItemName">Name:</label>
+        <input
+          type="text"
+          id="newItemName"
+          name="newItemName"
+          placeholder="esim. Mandariini"
+          required
+        />
+
+        <label for="newItemWeight">Weight (optional):</label>
+        <input
+          type="number"
+          id="newItemWeight"
+          name="newItemWeight"
+          placeholder="esim. 86"
+        />
+
+        <button type="submit" style="margin-top: 10px">Add Item</button>
+      </form>
+
+      <!-- jos ehditään lisätään tämä -->
+      <h3>Items, PUT (muokkaa itemiä)</h3>
+
+      <form class="put-item-form">
+        <label for="putItemId">Item ID:</label>
+        <input
+          type="number"
+          id="putItemId"
+          name="putItemId"
+          placeholder="esim. 1"
+          required
+        />
+
+        <button type="button" class="load-item" style="margin-top: 10px">
+          Hae item muokattavaksi
+        </button>
+
+        <div style="margin-top: 10px">
+          <label for="putItemName">Uusi nimi:</label>
+          <input
+            type="text"
+            id="putItemName"
+            name="putItemName"
+            placeholder="esim. updated Omena"
+            required
+          />
+        </div>
+
+        <button type="submit" style="margin-top: 10px">Päivitä (PUT)</button>
+      </form>
+
       <h3>Esimerkkitaulukko, staattinen</h3>
 
       <table class="styled-table">
         <thead>
           <tr>
-            <th>User Name</th>
-            <th>Email</th>
+            <th>Item Name</th>
             <th>Info</th>
             <th>Delete</th>
             <th>ID</th>
@@ -53,16 +104,14 @@
         </thead>
         <tbody>
           <tr>
-            <td>Dom</td>
-            <td>dom@google.com</td>
+            <td>Banana</td>
             <td><button class="check">Info</button></td>
             <td><button class="del">Delete</button></td>
             <td>1</td>
           </tr>
           <!--  <tr class="active-row"> -->
           <tr>
-            <td>Melissa</td>
-            <td>melissa@google.com</td>
+            <td>Cherry</td>
             <td><button class="check">Info</button></td>
             <td><button class="del">Delete</button></td>
             <td>2</td>
@@ -70,15 +119,15 @@
         </tbody>
       </table>
 
-      <h3>Haetaan nappia painamalla kaikki käyttäjät</h3>
+      <h3>Haetaan nappia painamalla kaikki itemit ja tehdään lista</h3>
 
       <pre>GET http://localhost:3000/api/users</pre>
 
-      <button class="get_users">Get all users</button>
+      <button class="get_items_table">Get all items</button>
 
       <div class="forms">
         <div style="flex: 1">
-          <h3>GET - Tästä eteenpäin teemme tiistaina</h3>
+          <h3>GET - Haetaan itemit ja renderöidään esim. lista</h3>
 
           <p>
             Hae käyttäjän tiedot painamalla alla olevaa nappia. Tämä hakee
@@ -91,17 +140,14 @@
           <table class="styled-table">
             <thead>
               <tr>
-                <th>User Name</th>
-                <th>Email</th>
+                <th>Item Name</th>
                 <th>Info</th>
                 <th>Delete</th>
                 <th>ID</th>
               </tr>
             </thead>
             <tbody class="tbody">
-              <!-- tänne haetaan kaikki käyttäjät -->
-              <!-- # Get all users -->
-              <!-- GET http://127.0.0.1:3000/api/users -->
+              <!-- tänne haetaan kaikki itemit -->
             </tbody>
           </table>
         </div>
@@ -110,7 +156,7 @@
 
           <p>
             Lisää käyttäjiä formin avulla. Formi lisää uuden käyttäjän
-            nappulasta 'Add User'.
+            nappulasta 'Add User'. Voit tehdä tämän kotityönä.
           </p>
 
           <!-- https://www.w3schools.com/css/css_form.asp -->

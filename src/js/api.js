@@ -1,90 +1,28 @@
-import '../css/api.css';
+const BASE_URL = 'http://127.0.0.1:3000/api';
 
-console.log('Scripti starttaa');
+export async function apiFetch(path, options = {}) {
+  const token = localStorage.getItem('mealentry_token');
 
-// sync ja asyc ajatus ja demo
-
-function synchronousFunction() {
-  let number = 1;
-  for (let i = 1; i < 10000; i++) {
-    number += i;
-    console.log('synchronousFunction running');
-  }
-  console.log('regular function complete', number);
-}
-
-// synchronousFunction();
-
-console.log('Valmis');
-
-// synkroninen
-console.log('1');
-console.log('2');
-console.log('3');
-
-// async suoritus
-
-console.log('1');
-
-setTimeout(() => {
-  console.log('2');
-}, 4000);
-
-console.log('3');
-
-// GET
-// eka haku ulkoiseen rajapintaan
-// tämä on fetch käyttäen promisea (eli lupausta)
-// ja ON asykroninen
-
-fetch('https://api.restful-api.dev/objects')
-  .then((response) => {
-    console.log(response);
-    if (!response.ok) {
-      throw new Error('Verkkovastaus ei ollut kunnossa');
-    }
-    return response.json();
-  })
-  .then((data) => {
-    console.log(data);
-  })
-  .catch((error) => {
-    console.error('Fetch-operaatiossa ilmeni ongelma:', error);
+  const res = await fetch(`${BASE_URL}${path}`, {
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(options.headers || {}),
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
   });
 
-// Yksikertaistetaan ja modernisoidaan haku
-// käytettän async ja await avainsanoja
-
-async function getData() {
-  try {
-    const response = await fetch('https://api.restful-api.dev/objects');
-    const data = await response.json();
-    console.log(data);
-  } catch (error) {
-    console.error('Virhe:', error);
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const msg = data?.message || `HTTP ${res.status}`;
+    throw new Error(msg);
   }
+  return data;
 }
 
-getData();
-
-// ensimmäinen oma kutsu BE puolelle
-const consoleLogItems = async () => {
-  try {
-    // default on GET kutsu ilman optiota
-    const response = await fetch('http://localhost:3000/api/items');
-    const data = await response.json();
-    console.log('Haetaan omasta rajapinnasta!!!');
-    console.log(data);
-
-    data.forEach((rivi) => {
-      console.log(rivi);
-      console.log(rivi.name);
-    });
-  } catch (error) {
-    console.error('Virhe:', error);
-  }
-};
-
-consoleLogItems();
-
-// siirrettän varsinanne fetch omaksi geneeriseksi funktioksi
+const getItemsBtn = document.getElementById('getItemsBtn');
+if (getItemsBtn) {
+  getItemsBtn.addEventListener('click', async () => {
+    //
+  });
+}

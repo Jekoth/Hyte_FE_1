@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="fi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="description" content="MealEntry kirjautuminen" />
+    <title>MealEntry | Kirjaudu</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;1,300&family=Roboto+Slab:wght@300;400;700;900&family=Roboto:wght@300;400;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/login.css" />
+  </head>
+
+  <body>
+    <!-- NAV -->
+    <nav class="site-nav">
+      <div class="nav-inner">
+        <a href="index.html" class="logo">MealEntry</a>
+        <ul class="nav-links">
+          <li><a href="index.html" class="navlink">Koti</a></li>
+          <li><a href="bmi.html" class="navlink">BMI laskuri</a></li>
+
+          <li class="nav-user">
+            <span id="userBadge" class="user-badge"></span>
+          </li>
+
+          <li class="nav-right">
+            <a href="login.html" class="navlink nav-cta" id="authLink">Kirjaudu</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="hero" style="margin-top: 20px;">
+      <div class="hero-content">
+        <p class="hero-kicker">Tervetuloa takaisin</p>
+        <h1 class="hero-title" style="font-size: 36px;">
+          Kirjaudu <span class="main_cl">MealEntryyn</span>
+        </h1>
+        <p class="hero-lead" style="margin-bottom: 0;">
+          Kirjautumalla pääset lisäämään ja tarkastelemaan omia merkintöjäsi.
+        </p>
+      </div>
+    </header>
+
+    <main class="auth-page">
+      <section class="auth-card">
+        <h2 class="black_cl bolder">Kirjautuminen</h2>
+        <p class="description">Kirjaudu sisään käyttäjätunnuksella.</p>
+
+        <p id="formMsg" class="form-msg"></p>
+
+        <form id="loginForm">
+          <label for="username">Käyttäjänimi</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="esim. Rizvan"
+            required
+          />
+
+          <label for="password">Salasana</label>
+          <div class="pw-row">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="••••••••"
+              required
+            />
+            <button type="button" id="pwToggle" class="pw-toggle">Näytä</button>
+          </div>
+
+          <button class="btn" id="loginBtn" type="submit">Kirjaudu</button>
+        </form>
+
+        <p class="auth-hint">
+          Ei vielä tiliä? <a href="register.html" class="main_cl">Rekisteröidy</a>
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>Copyright, MealEntry</p>
+    </footer>
+
+    <script>
+      const form = document.getElementById('loginForm');
+      const msg = document.getElementById('formMsg');
+      const loginBtn = document.getElementById('loginBtn');
+      const pwToggle = document.getElementById('pwToggle');
+      const pwInput = document.getElementById('password');
+
+      const setMsg = (text, type) => {
+        msg.textContent = text;
+        msg.className = `form-msg ${type ? `is-${type}` : ''}`;
+        msg.style.display = text ? 'block' : 'none';
+      };
+
+      pwToggle.addEventListener('click', () => {
+        const isHidden = pwInput.type === 'password';
+        pwInput.type = isHidden ? 'text' : 'password';
+        pwToggle.textContent = isHidden ? 'Piilota' : 'Näytä';
+      });
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        setMsg('', '');
+
+        const username = document.getElementById('username').value.trim();
+        const password = pwInput.value;
+
+        if (!username || !password) {
+          setMsg('Täytä käyttäjänimi ja salasana.', 'error');
+          return;
+        }
+
+        loginBtn.disabled = true;
+        const oldText = loginBtn.textContent;
+        loginBtn.textContent = 'Kirjaudutaan...';
+
+        try {
+          const res = await fetch('http://127.0.0.1:3000/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password }),
+          });
+
+          const data = await res.json().catch(() => ({}));
+
+          if (!res.ok) {
+            setMsg(data.message || 'Kirjautuminen epäonnistui', 'error');
+            return;
+          }
+
+          localStorage.setItem('mealentry_token', data.token);
+          localStorage.setItem('mealentry_user', JSON.stringify(data.user));
+
+          setMsg('Kirjautuminen onnistui! Siirrytään etusivulle…', 'ok');
+          setTimeout(() => (window.location.href = 'index.html'), 600);
+        } catch (err) {
+          console.error(err);
+          setMsg('Yhteys backendille epäonnistui. Onko serveri käynnissä portissa 3000?', 'error');
+        } finally {
+          loginBtn.disabled = false;
+          loginBtn.textContent = oldText;
+        }
+      });
+    </script>
+  </body>
+</html>

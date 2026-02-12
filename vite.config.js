@@ -10,6 +10,7 @@ export default defineConfig({
       input: {
         home: resolve(__dirname, 'index.html'),
         bmi: resolve(__dirname, 'bmi.html'),
+        viikoteh: resolve(__dirname, 'viikkotehtavat.html'),
       },
     },
   },

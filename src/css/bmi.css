@@ -1,31 +1,41 @@
-/*********************/
-/* BMI osion tyylittely */
+/* BMI page */
 
-.card {
+.bmi-page .bmi-card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   max-width: 500px;
   margin: 50px auto;
   padding: 30px;
+  background: #fff;
+  border-radius: 18px;
 }
 
-.card > h2 {
+.bmi-page .bmi-card img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto 20px auto;
+  border-radius: 14px;
+}
+
+.bmi-page .bmi-card > h2 {
   margin-top: 15px;
 }
 
-.card p {
+.bmi-page .bmi-card p {
   margin-top: 20px;
   margin-bottom: 20px;
 }
-.description {
+
+.bmi-page .description {
   color: grey;
   font-size: 18px;
 }
 
-label {
+.bmi-page .bmi-card label {
   display: block;
 }
 
-input[type='text'] {
+.bmi-page .bmi-card input[type='text'] {
   width: 50%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -35,7 +45,7 @@ input[type='text'] {
   box-sizing: border-box;
 }
 
-.btn {
+.bmi-page .bmi-card .btn {
   margin-top: 20px;
   margin-bottom: 20px;
   border: none;
@@ -48,28 +58,30 @@ input[type='text'] {
   cursor: pointer;
   width: 100%;
   font-size: 18px;
+  border-radius: 14px;
 }
 
-.btn:hover,
-a:hover {
+.bmi-page .bmi-card .btn:hover {
   opacity: 0.7;
 }
 
-tbody {
+.bmi-page .bmi-card tbody {
   background-color: #fff;
 }
 
-td {
+.bmi-page .bmi-card td {
   border: 1px solid #ddd;
   padding: 5px;
 }
 
-.lowBmi {
+.bmi-page .lowBmi {
   background-color: rgb(71, 178, 210);
 }
-.normalBmi {
+
+.bmi-page .normalBmi {
   background-color: rgb(112, 223, 112);
 }
-.highBmi {
+
+.bmi-page .highBmi {
   background-color: rgb(244, 148, 30);
 }
