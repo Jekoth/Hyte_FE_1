@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="fi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Ateria laskuri MealEntryyn. Hae ruoka-aineet nimellä, laske ravintoarvot ja avaa aiemmat haut."
+    />
+    <title>MealEntry | Ateria laskuri</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&family=Roboto+Slab:wght@300;700;900&family=Roboto:wght@300;400;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/src/css/style.css" />
+    <link rel="stylesheet" href="/src/css/meal.css" />
+  </head>
+
+  <body>
+    <nav class="site-nav">
+      <div class="nav-inner">
+        <a href="index.html" class="logo">MealEntry</a>
+
+        <ul class="nav-links">
+          <li><a href="index.html" class="navlink">Koti</a></li>
+          <li><a href="meal.html" class="navlink selected">Ateria laskuri</a></li>
+
+          <li class="nav-user">
+            <span id="userBadge" class="user-badge"></span>
+          </li>
+
+          <li class="nav-right">
+            <a href="login.html" class="navlink nav-cta" id="authLink">Kirjaudu</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <header class="hero meal-hero">
+      <div class="hero-content">
+        <p class="hero-kicker">Oikeat ravintoarvot tuotteista</p>
+        <h1 class="hero-title">Ateria laskuri</h1>
+        <p class="hero-lead">
+          Lisää ruoka-aineet nimellä ja määrä grammoina. Sivu hakee ravintoarvot
+          automaattisesti, laskee koko aterian arvot ja antaa terveyspisteet.
+          Voit myös hakea aiemmat omat haut ja avata ne uudelleen.
+        </p>
+      </div>
+    </header>
+
+    <main>
+      <section class="meal-layout">
+        <section class="meal-card">
+          <h2>Syötä ateria</h2>
+          <p class="meal-muted">
+            Esimerkki: kanafilee 150 g, riisi 180 g, cheddar 30 g. Käytä tavallisia
+            tuotteen nimiä. Myöhemmin voit hakea omat aiemmat haut takaisin näkyviin.
+          </p>
+
+          <form id="mealForm">
+            <div id="mealRows"></div>
+
+            <div class="meal-actions">
+              <button type="button" id="addRowBtn" class="btn-secondary">
+                + Lisää rivi
+              </button>
+
+              <button type="submit" id="analyzeBtn" class="btn btn-inline">
+                Laske ateria
+              </button>
+
+              <button type="button" id="saveMealBtn" class="btn-secondary">
+                Tallenna haku
+              </button>
+
+              <button type="button" id="loadHistoryBtn" class="btn-secondary">
+                Hae edelliset haut
+              </button>
+            </div>
+          </form>
+
+          <p id="formStatus" class="status-box"></p>
+        </section>
+
+        <section class="meal-card">
+          <h2>Tulos</h2>
+          <div id="mealResult" class="empty-state">
+            Lisää vähintään yksi ruoka ja paina <strong>Laske ateria</strong>.
+          </div>
+        </section>
+      </section>
+
+      <section class="meal-card" style="margin-bottom: 28px">
+        <h2>Edelliset haut</h2>
+        <p class="meal-muted">
+          Paina <strong>Hae edelliset haut</strong> nähdäksesi omat aiemmat
+          tallennetut ateriat. Painamalla hakua voit avata sen uudelleen.
+        </p>
+
+        <div id="mealHistoryList" class="empty-state">
+          Ei vielä haettuja tai tallennettuja aterioita.
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Copyright, MealEntry</p>
+    </footer>
+
+    <script type="module" src="/src/js/main.js"></script>
+    <script type="module" src="/src/js/meal.js"></script>
+  </body>
+</html>

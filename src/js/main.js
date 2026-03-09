@@ -1,5 +1,6 @@
 import '../css/style.css';
 import '../css/mobile.css';
+import './nav-auth.js';
 
 function updateNavAuth() {
   const authLink = document.getElementById('authLink');

@@ -31,6 +31,7 @@
         <ul class="nav-links">
           <li><a href="index.html" class="navlink selected">Koti</a></li>
           <li><a href="bmi.html" class="navlink">BMI laskuri</a></li>
+          <li><a href="meal.html" class="navlink">Ateria laskuri</a></li>
 
           <span id="userBadge" class="user-badge"></span>
 
@@ -49,16 +50,17 @@
         <p class="hero-kicker">Ruoka & olo -päiväkirja</p>
 
         <h1 class="hero-title">
-          Kirjaa ateriat ja olo – <span class="main_cl">löydä oma rytmisi</span>
+          Kirjaa ateriat ja olo - <span class="main_cl">löydä oma rytmisi</span>
         </h1>
 
         <p class="hero-lead">
           MealEntry auttaa seuraamaan, miten syöminen vaikuttaa energiaan, nälkään
-          ja fiilikseen. Aloita kirjautumalla sisään.
+          ja fiilikseen.
+          <span data-hide-when-logged-in>Aloita kirjautumalla sisään.</span>
         </p>
 
         <div class="hero-actions">
-          <a class="btn btn-inline" href="login.html">Kirjaudu ja aloita</a>
+          <a class="btn btn-inline" href="login.html" data-hide-when-logged-in>Kirjaudu ja aloita</a>
           <a class="btn btn-inline btn-outline" href="bmi.html">Kokeile BMI-laskuria</a>
           <a class="btn btn-inline btn-outline" href="#info">Miten toimii?</a>
         </div>
@@ -104,27 +106,102 @@
           </article>
         </div>
       </section>
+    <section class="about-us" id="start">
+      <div class="about-wrap">
 
-      <section class="about-us" id="start">
-        <div class="about-wrap">
-          <div class="about-badge">Aloita tästä</div>
-          <h2 class="black_cl bolder mb-10">Tee ensimmäinen askel</h2>
-          <p>
-            Kun kirjaat muutaman päivän ajan, näet jo omat rutiinisi selkeämmin.
-          </p>
+        <div class="about-grid">
 
-          <ul class="about-list">
-            <li> Kirjautuminen ja omat tiedot</li>
-            <li> Merkinnät tallessa omalla käyttäjällä</li>
-            <li> Toimii myös puhelimella</li>
-          </ul>
+          <div class="about-text">
 
-          <div class="about-actions">
-            <a class="btn btn-inline" href="login.html">Kirjaudu</a>
-            <a class="btn btn-inline btn-outline" href="bmi.html">BMI-laskuri</a>
+            <div class="about-badge">📊 MealEntry analyysi</div>
+
+            <h2 class="black_cl bolder mb-10">
+              Tee parempia ruokavalintoja
+            </h2>
+
+            <p>
+              MealEntryn avulla voit laskea aterian ravintoarvot, nähdä
+              terveyspisteet ja palata aiemmin tallennettuihin hakuihin.
+              Näin opit tunnistamaan millaiset ateriat sopivat sinulle
+              parhaiten.
+            </p>
+
+            <ul class="about-list">
+              <li>⚡ Laske aterian ravintoarvot sekunneissa</li>
+              <li>📚 Avaa aiemmat haut ja vertaile aterioita</li>
+              <li>📈 Näe mitkä ruokavalinnat toimivat sinulle</li>
+              <li>🔐 Tallennettu omalle käyttäjällesi</li>
+            </ul>
+
+            <div class="about-actions">
+              <a class="btn btn-inline" href="meal.html">
+                Siirry ateria laskuriin
+              </a>
+
+              <a class="btn btn-inline btn-outline" href="#info">
+                Lue lisää
+              </a>
+            </div>
+
           </div>
+
+          <!-- PREVIEW CARD -->
+          <div class="about-preview">
+
+            <div class="meal-preview-card">
+
+              <div class="preview-title">Esimerkki analyysi</div>
+
+              <div class="preview-score good">
+                Hyvä ateria
+              </div>
+
+              <div class="preview-metrics">
+
+                <div>
+                  <small>Kalorit</small>
+                  <strong>620 kcal</strong>
+                </div>
+
+                <div>
+                  <small>Proteiini</small>
+                  <strong>38 g</strong>
+                </div>
+
+                <div>
+                  <small>Hiilarit</small>
+                  <strong>72 g</strong>
+                </div>
+
+                <div>
+                  <small>Rasva</small>
+                  <strong>18 g</strong>
+                </div>
+
+                <div>
+                  <small>Kuitu</small>
+                  <strong>9 g</strong>
+                </div>
+
+                <div>
+                  <small>Suola</small>
+                  <strong>0.8 g</strong>
+                </div>
+
+              </div>
+
+              <div class="preview-health">
+                Terveys pisteet: <strong>82 / 100</strong>
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
-      </section>
+      </div>
+    </section>
+
     </main>
 
     <footer>

@@ -1,4 +1,5 @@
-const BASE_URL = 'http://127.0.0.1:3000/api';
+import { apiFetchPublic, normalizeErrorMessage } from './api.js';
+import { handleError } from './error-handler.js';
 
 const form = document.getElementById('registerForm');
 const msg = document.getElementById('formMsg');
@@ -11,14 +12,6 @@ if (form && msg && btn) {
     msg.style.color = ok ? 'rgba(24, 140, 70, 1)' : 'rgba(200, 40, 40, 1)';
   };
 
-  const safeJson = async (res) => {
-    try {
-      return await res.json();
-    } catch {
-      return {};
-    }
-  };
-
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     setMsg('');
@@ -28,43 +21,45 @@ if (form && msg && btn) {
     const password = document.getElementById('password')?.value;
     const password2 = document.getElementById('password2')?.value;
 
-    if (!username || !email || !password) return setMsg('Täytä kaikki kentät.');
-    if (password.length < 6) return setMsg('Salasanan pitää olla vähintään 6 merkkiä.');
-    if (password !== password2) return setMsg('Salasanat eivät täsmää.');
+    if (!username || !email || !password) {
+      setMsg('Täytä kaikki kentät.');
+      return;
+    }
+
+    if (password.length < 6) {
+      setMsg('Salasanan pitää olla vähintään 6 merkkiä.');
+      return;
+    }
+
+    if (password !== password2) {
+      setMsg('Salasanat eivät täsmää.');
+      return;
+    }
 
     btn.disabled = true;
     const old = btn.textContent;
     btn.textContent = 'Luodaan tili...';
 
     try {
-      // register
-      const regRes = await fetch(`${BASE_URL}/users`, {
+      await apiFetchPublic('/users', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({username, email, password}),
+        body: JSON.stringify({ username, email, password }),
       });
 
-      const regData = await safeJson(regRes);
-      if (!regRes.ok) return setMsg(regData.message || 'Rekisteröinti epäonnistui');
-
-      // auto- login
-      const loginRes = await fetch(`${BASE_URL}/auth/login`, {
+      const loginData = await apiFetchPublic('/auth/login', {
         method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({username, password}),
+        body: JSON.stringify({ username, password }),
       });
-
-      const loginData = await safeJson(loginRes);
-      if (!loginRes.ok) return setMsg('Tili luotu, mutta kirjautuminen epäonnistui. Kirjaudu erikseen.');
 
       localStorage.setItem('mealentry_token', loginData.token);
       localStorage.setItem('mealentry_user', JSON.stringify(loginData.user));
 
       setMsg('Tili luotu! Siirrytään…', true);
-      setTimeout(() => (window.location.href = 'index.html'), 600);
-    } catch (err) {
-      console.error(err);
-      setMsg('Yhteys backendille epäonnistui. Onko serveri käynnissä portissa 3000?');
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 600);
+    } catch (error) {
+      handleError(error, setMessage, 'Rekisteröinti epäonnistui.');
     } finally {
       btn.disabled = false;
       btn.textContent = old;

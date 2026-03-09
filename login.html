@@ -28,6 +28,7 @@
         <ul class="nav-links">
           <li><a href="index.html" class="navlink">Koti</a></li>
           <li><a href="bmi.html" class="navlink">BMI laskuri</a></li>
+          <li><a href="meal.html" class="navlink">Ateria laskuri</a></li>
 
           <li class="nav-user">
             <span id="userBadge" class="user-badge"></span>
@@ -41,7 +42,7 @@
     </nav>
 
     <!-- HERO -->
-    <header class="hero" style="margin-top: 20px;">
+    <header class="hero">
       <div class="hero-content">
         <p class="hero-kicker">Tervetuloa takaisin</p>
         <h1 class="hero-title" style="font-size: 36px;">
@@ -131,7 +132,7 @@
         loginBtn.textContent = 'Kirjaudutaan...';
 
         try {
-          const res = await fetch('http://127.0.0.1:3000/api/auth/login', {
+          const res = await fetch('/api/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password }),

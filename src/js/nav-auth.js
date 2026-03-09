@@ -5,6 +5,7 @@ export function updateNavAuth() {
   const token = localStorage.getItem('mealentry_token');
 
   if (token) {
+    authLink.style.display = '';
     authLink.textContent = 'Kirjaudu ulos';
     authLink.href = '#logout';
 
@@ -15,11 +16,20 @@ export function updateNavAuth() {
       window.location.href = 'index.html';
     };
   } else {
+    authLink.style.display = '';
     authLink.textContent = 'Kirjaudu';
     authLink.href = 'login.html';
     authLink.onclick = null;
   }
 }
 
-//ajetaan heti kun tiedosto ladataan
+export function hideLoginContentIfLoggedIn() {
+  const token = localStorage.getItem('mealentry_token');
+
+  document.querySelectorAll('[data-hide-when-logged-in]').forEach((el) => {
+    el.style.display = token ? 'none' : '';
+  });
+}
+
+hideLoginContentIfLoggedIn();
 updateNavAuth();
